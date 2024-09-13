@@ -19,17 +19,46 @@ public class HighwaysAndHospitals {
      *  hospital access for all citizens in Menlo County.
      */
     public static long cost(int n, int hospitalCost, int highwayCost, int cities[][]) {
-        boolean[] hasVisited = new boolean[n];
-        // Length = # of clusters = # hospitals
-        // Size of each element = number of cities --- # highways = cities - 1
-        ArrayList<Integer> clusters = new ArrayList<Integer>();
+        // # empty slots = # of clusters = # hospitals
+        // # highways = cities(n) - # of clusters(empty slots
+        int[] roots = new int[n];
+
+        int root1, root2 = 0;
+        for(int i = 0; i < cities[0].length; i++){
+            // Sets the root to the first layer above the city
+            root1 = roots[cities[i][0]];
+            root2 = roots[cities[i][1]];
+
+            // Find root 1
+            // If the layer above is 0, then the city is a root (meaning city = city's root)
+            if(root1 == 0){
+                root1 = cities[i][0];
+            }
+            else{
+                // Keep going up the tree until the level above you is zero
+                while(roots[root1] != 0){
+                    root1 = roots[root1];
+                }
+            }
+
+            // Similarly, find root 2
+            if(root2 == 0){
+                root2 = cities[i][0];
+            }
+            else{
+                // Keep going up the tree until the level above you is zero
+                while(roots[root2] != 0){
+                    root2 = roots[root2];
+                }
+            }
 
 
-        Queue<Integer> toVisit = new LinkedList<Integer>();
-        toVisit.add(0);
+            if(root1 != root2){
+                // Make root1 the root of root2
+                roots[root2] = root1;
+            }
 
 
-        for(int i = 0; i < n; i++){
         }
 
 
