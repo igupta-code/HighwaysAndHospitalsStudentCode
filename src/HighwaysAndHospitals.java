@@ -20,7 +20,7 @@ public class HighwaysAndHospitals {
      */
     public static long cost(int n, int hospitalCost, int highwayCost, int cities[][]) {
         // # empty slots = # of clusters = # hospitals
-        // # highways = cities(n) - # of clusters(empty slots
+        // # highways = cities(n) - # of clusters(empty slots)
         int[] roots = new int[n];
 
         int root1, root2 = 0;
@@ -43,7 +43,7 @@ public class HighwaysAndHospitals {
 
             // Similarly, find root 2
             if(root2 == 0){
-                root2 = cities[i][0];
+                root2 = cities[i][1];
             }
             else{
                 // Keep going up the tree until the level above you is zero
@@ -58,10 +58,16 @@ public class HighwaysAndHospitals {
                 roots[root2] = root1;
             }
 
-
         }
 
+        // Figure out how many cluster there are by looking at number of empty element in array
+        int clusters = 0;
+        for(int i = 0; i < roots.length; i++){
+            if (roots[i] == 0){
+                i++;
+            }
+        }
 
-        return 0;
+        return hospitalCost * clusters + highwayCost*(n - clusters);
     }
 }
