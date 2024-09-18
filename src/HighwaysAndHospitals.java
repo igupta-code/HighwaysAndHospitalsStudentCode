@@ -21,6 +21,10 @@ public class HighwaysAndHospitals {
     public static long cost(int n, int hospitalCost, int highwayCost, int cities[][]) {
         // # empty slots = # of clusters = # hospitals
         // # highways = cities(n) - # of clusters(empty slots)
+        if(highwayCost > hospitalCost){
+            return (long)hospitalCost*n;
+        }
+
         int[] roots = new int[n+1];
 
         int root1, root2 = 0;
