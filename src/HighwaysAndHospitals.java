@@ -21,10 +21,10 @@ public class HighwaysAndHospitals {
     public static long cost(int n, int hospitalCost, int highwayCost, int cities[][]) {
         // # empty slots = # of clusters = # hospitals
         // # highways = cities(n) - # of clusters(empty slots)
-        int[] roots = new int[n];
+        int[] roots = new int[n+1];
 
         int root1, root2 = 0;
-        for(int i = 0; i < cities[0].length; i++){
+        for(int i = 0; i < cities.length; i++){
             // Sets the root to the first layer above the city
             root1 = roots[cities[i][0]];
             root2 = roots[cities[i][1]];
@@ -55,19 +55,20 @@ public class HighwaysAndHospitals {
 
             if(root1 != root2){
                 // Make root1 the root of root2
-                roots[root2] = root1;
+                //roots[root2] = root1;
+                roots[root2] = cities[i][0];
             }
 
         }
 
         // Figure out how many cluster there are by looking at number of empty element in array
         int clusters = 0;
-        for(int i = 0; i < roots.length; i++){
+        for(int i = 1; i < roots.length; i++){
             if (roots[i] == 0){
-                i++;
+                clusters++;
             }
         }
-
-        return hospitalCost * clusters + highwayCost*(n - clusters);
+        System.out.println((hospitalCost * clusters) + (long)highwayCost*(n - clusters));
+        return (long)(hospitalCost * clusters) + (long)highwayCost*(n - clusters);
     }
 }
