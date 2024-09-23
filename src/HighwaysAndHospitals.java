@@ -61,7 +61,7 @@ public class HighwaysAndHospitals {
             }
             // Go through path again and assign everything on the way to top root
             while(roots[node] > 0 && roots[node] != root2){
-                temp = roots[root1];
+                temp = roots[node];
                 roots[node] = root2;
                 node = temp;
             }
@@ -85,12 +85,16 @@ public class HighwaysAndHospitals {
 
         // Figure out how many cluster there are by looking at number of empty element in array
         int clusters = 0;
+        int singles = 0;
         for(int i = 1; i < roots.length; i++){
             if (roots[i] < 0){
                 clusters++;
             }
+            if (roots[i] == 0){
+                singles++;
+            }
         }
         System.out.println((hospitalCost * clusters) + (long)highwayCost*(n - clusters));
-        return (long)(hospitalCost * clusters) + (long)highwayCost*(n - clusters);
+        return (long)(hospitalCost * (clusters+singles)) + (long)highwayCost*(n - (singles + clusters));
     }
 }
