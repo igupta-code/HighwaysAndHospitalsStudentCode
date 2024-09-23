@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -22,7 +23,8 @@ public class HighwaysAndHospitals {
         // # empty slots = # of clusters = # hospitals
         // # highways = cities(n) - # of clusters(empty slots)
         if(highwayCost > hospitalCost){
-            return (long)hospitalCost*n;
+            System.out.println((long)(hospitalCost)* (long)(n));
+            return (long)(hospitalCost)* (long)(n);
         }
 
         int[] roots = new int[n+1];
@@ -34,7 +36,6 @@ public class HighwaysAndHospitals {
             // Sets the root to the first layer above the city
             root1 = cities[i][0];
             root2 = cities[i][1];
-
 
 
             // Find root 1
@@ -50,8 +51,6 @@ public class HighwaysAndHospitals {
                 roots[node] = root1;
                 node = temp;
             }
-
-
 
             // Similarly, find root 2
             // Keep going up the tree until the level above you is zero
@@ -94,7 +93,7 @@ public class HighwaysAndHospitals {
                 singles++;
             }
         }
-        System.out.println((hospitalCost * clusters) + (long)highwayCost*(n - clusters));
-        return (long)(hospitalCost * (clusters+singles)) + (long)highwayCost*(n - (singles + clusters));
+        System.out.println((long)(hospitalCost * (clusters+singles)) + (long)highwayCost*(n - (singles + clusters)));
+        return (long)(hospitalCost * (long)(clusters+singles)) + (long)highwayCost*((long)n - (long)(singles + clusters));
     }
 }
